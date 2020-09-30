@@ -4,3 +4,11 @@ services:
 script:
    - docker build -t zeidane/node2 .
    - docker images zeidane/node2
+
+before_deploy:
+   - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+deploy:
+  provider: script 
+  script: docker push zeidane/node2
+  on:
+    branch: master
